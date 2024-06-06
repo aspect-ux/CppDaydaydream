@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-#add_subdirectory("01 Object-Oriented Programming")
+add_subdirectory("01 Graphics Algorithms")
 
 
 # you maybe need assets file and want to copy it to cmake binary dir
