@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Core.h"
 
 class Vector3f
 {
@@ -57,6 +58,86 @@ bool IntersectWithTriangle(const Vector3f& p0, const Vector3f& p1, const Vector3
     float b2 = dot(cross(ray, S), E1) / det_A;// det(-ray,E1,S) = dot(E1,cross(ray,S)) = ray * (S x E1) = ray * S2
     float b3 = 1 - b1 - b2;
     return b1 >= 0 && b2 >= 0 && b3 >= 0 && t >= 0;
+}
+
+// 左手系
+// Eigen是按列存储的，GLM是按行存储的
+// 前者一般是左乘变换矩阵
+// 我们这里也按列存储
+//-------------------Get MVP Matrix---------------------------
+//TODO: MVP推导，we need model and projection inference
+Core::DreamMatrix4f get_model_matrix(float rotation_angle)
+{
+    //TODO
+    // model需要旋转
+    Core::DreamMatrix4f model; model.Identity();
+    // TODO: Implement this function
+    // Create the model matrix for rotating the triangle around the Z axis.
+    // Then return it.
+    float angle = rotation_angle / 180;//* PI;
+    /*model << std::cos(angle), -std::sin(angle), 0, 0,
+        std::sin(angle), std::cos(angle), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1;*/
+
+    return model;
+}
+Core::DreamMatrix4f get_view_matrix(Core::DreamVector eye_pos)
+{
+    // view matrix视图矩阵
+    // 这一步做的事是拜访好相机
+    // 具体分为两步
+    // 1）将相机位移[Translate] 到 原点
+    // 2）将相机的三个轴通过旋转[Rotate] 与世界空间的三个轴分别对齐
+    //    正常思路  Rotation * Camera_Axis = World_Axis,但是直接把Camera_Axis除过去然后求乘积太麻烦，由于Rotation是正交矩阵，World_Axis的逆矩阵好求
+    //    于是，Rotation(^-1) = Camera_Axis * World_Axis(^-1) ,其中World_Axis是单位矩阵
+    Core::DreamMatrix4f view;
+    view.Identity();//单位矩阵
+
+    // 平移变换
+    Core::DreamMatrix4f translate;
+    translate.matrix[0][3] = -eye_pos.x;
+    translate.matrix[1][3] = -eye_pos.y;
+    translate.matrix[2][3] = -eye_pos.z;
+    //translate << 1, 0, 0, -eye_pos[0], 0, 1, 0, -eye_pos[1], 0, 0, 1,-eye_pos[2], 0, 0, 0, 1;
+
+    // 旋转变换,需要相机的right,up,forward 左手坐标系
+    Core::DreamMatrix4f rotate;
+    rotate.Identity();
+    //rotate._11 = right.x, rotate._21 = right.y, rotate._31 = right.z;
+    //rotate._12 = up.x, rotate._22 = up.y, rotate._32 = up.z;
+    //rotate._13 = forward.x, rotate._23 = forward.y, rotate._33 = forward.z;
+
+    view = translate * view;
+
+    return view;
+}
+
+Core::DreamMatrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
+    float zNear, float zFar)
+{
+    // Students will implement this function
+    Core::DreamMatrix4f projection; projection.Identity();
+    Core::DreamMatrix4f perspective; perspective.Identity();
+    /*Mperspective << zNear, 0, 0, 0,
+        0, zNear, 0, 0,
+        0, 0, zNear + zFar, -zNear * zFar,
+        0, 0, 1, 0;*/
+
+    /* 假定 eye_fov 是上下的角度 */
+    /* zNear 需要取反，因为推导的矩阵是建立在 zNear ~ zFar 为负值的情况 */
+    float half_height = std::tan(eye_fov / 2) * -zNear;
+    float half_width = half_height * aspect_ratio;
+
+    // 先平移后缩放，正交投影
+    Core::DreamMatrix4f Morth;
+    /*Morth << 1 / half_width, 0, 0, 0,
+        0, 1 / half_height, 0, 0,
+        0, 0, 2 / (zNear - zFar), (zFar - zNear) / (zNear - zFar),
+        0, 0, 0, 1;*/
+
+    projection = Morth * perspective;
+    return projection;
 }
 
 // 如何判断点在三角形内
