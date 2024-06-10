@@ -3,7 +3,7 @@
 #include <list>
 //std::list 是一个双向链表容器，它允许在序列中的任何位置快速插入和删除元素。
 //不需要所有元素在内存中连续存储，因此它不会因为重新分配内存和移动元素而导致迭代器、引用或指针失效（除了指向被删除元素的迭代器、引用或指针）。
-namespace CPPTools
+namespace CPPWheels
 {
     // Simple Object Pool
     template<typename Object>

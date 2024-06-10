@@ -57,7 +57,7 @@ add_subdirectory("Core")
 # different knowledge points, this project is divided into four main contents.
 # maybe update other contents in the future...
 add_subdirectory("CppDaydaydream") # 1.cpp_basic_things
-add_subdirectory("STLDataStructures") # 2.stl_data_structures
+add_subdirectory("Wheels") # 2.stl_data_structures_wheels
 add_subdirectory("ProjectThings") # 3.project_things, project building problem or something like this
 add_subdirectory("Algorithms") # 4.algorithms, mainly solve general algorithm about gaming or novel technics that could be used in gaming here
 

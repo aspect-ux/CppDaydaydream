@@ -3,7 +3,6 @@
 * @file: Timer.h
 * @date: 2023/09/11
 */
-
 #pragma once
 #include <chrono>
 
@@ -17,22 +16,22 @@ namespace CppDaydaydream
 			Reset();
 		}
 		
-		// ÖØÖÃ
+		// é‡ç½®
 		void Reset()
 		{
-			// »ñÈ¡µ±Ç°Ê±¼ä(²»ÊÇÏµÍ³µÄÊ±¼ä)
+			// è·å–å½“å‰æ—¶é—´(ä¸æ˜¯ç³»ç»Ÿçš„æ—¶é—´)
 			m_Start = std::chrono::high_resolution_clock::now();
 		}
 
-		// ÒÑ¾­¹ıÈ¥µÄÊ±¼ä(Ãë)
+		// å·²ç»è¿‡å»çš„æ—¶é—´(ç§’)
 		float Elapsed()
 		{
-			// 1. 1ns = 10e9s, ·µ»Øµ¥Î»ÎªÃë
-			// 2. now() - now()µÈÓÚdurationÊ±¼ä¶Î£¬duration_cast×ª»»³Énano,È»ºóÍ¨¹ıcount()»ñÈ¡Ê±¼ä
+			// 1. 1ns = 1e-9s, è¿”å›å•ä½ä¸ºç§’
+			// 2. now() - now()ç­‰äºdurationæ—¶é—´æ®µï¼Œduration_castè½¬æ¢æˆnano,ç„¶åé€šè¿‡count()è·å–æ—¶é—´
 			return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - m_Start).count()* 0.001f * 0.001f * 0.001f;
 		}
 
-		// ÒÑ¾­¹ıÈ¥µÄÊ±¼ä(ºÁÃë)
+		// å·²ç»è¿‡å»çš„æ—¶é—´(æ¯«ç§’)
 		float ElapsedMillis()
 		{
 			return Elapsed() * 1000.0f;
@@ -41,48 +40,10 @@ namespace CppDaydaydream
 		std::chrono::time_point<std::chrono::high_resolution_clock> m_Start;
 	};
 	
-	/*
-	// Example of Timer
-	template<typename Fn>
-	class Timer1
-	{
-	public:
-		Timer(const char* name, Fn&& func)
-			: m_Name(name), m_Stopped(false), m_Func(func)
-		{
-			m_StartTimepoint = std::chrono::high_resolution_clock::now();
-		}
+	
+	
 
-		~Timer()
-		{
-			if (!m_Stopped)
-				Stop();
-		}
-
-		void Stop()
-		{
-			auto endTimepoint = std::chrono::high_resolution_clock::now();
-
-			// microsecondsÎ¢Ãë
-			long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-			long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
-
-			m_Stopped = true;
-
-			float duration = (end - start) * 0.001f;
-
-			//std::cout << m_Name << " Duration: " << duration << "ms" << std::endl;
-
-			m_Func({ m_Name,duration });
-		}
-	private:
-		const char* m_Name;
-		std::chrono::time_point<std::chrono::steady_clock> m_StartTimepoint;
-		bool m_Stopped;
-		Fn m_Func;
-	};*/
-
-	// []±íÊ¾²¶»ñ£¨capture£©ÉÏÏÂÎÄ±äÁ¿£¬[=]°´Öµ£¬[&]°´ÒıÓÃ£¬[]Ê²Ã´Ò²²»²¶»ñ
+	// []è¡¨ç¤ºæ•è·ï¼ˆcaptureï¼‰ä¸Šä¸‹æ–‡å˜é‡ï¼Œ[=]æŒ‰å€¼ï¼Œ[&]æŒ‰å¼•ç”¨ï¼Œ[]ä»€ä¹ˆä¹Ÿä¸æ•è·
 //#define PROFILE_SCOPE(name) Timer timer##__LINE__(name,[&](ProfileResult profileResult) {m_ProfileResults.push_back(profileResult); })
 
 }

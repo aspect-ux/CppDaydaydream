@@ -295,7 +295,7 @@ int main()
 		// 1.（不推荐）#include"相对路径"，没有采用链接，直接包含了另一个项目的头文件，并且相对路径的使用会很凌乱
 		// 2. addtional include direcs + $(SolutionDir)Core\src 直接把代码include进来，就可以使用绝对路径
 		// 其他库，动态dll调用，静态include + lib
-		Core::Print();
+		//Core::Print();
 	}
 	
 	system("pause:");

@@ -29,6 +29,6 @@ set_target_properties(01_Object_Pool PROPERTIES OUTPUT_NAME "01 Object Pool")
 
 set_target_properties(01_Object_Pool PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR})
 set_target_properties(01_Object_Pool PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR})
-set_target_properties(01_Object_Pool PROPERTIES FOLDER "STLDataStructures")
+set_target_properties(01_Object_Pool PROPERTIES FOLDER "Wheels")
 
 

@@ -3,7 +3,7 @@
 
 namespace CppDaydaydream
 {
-	using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>; // Î¢Ãë
+	using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>; // å¾®ç§’
 
 	class InstrumentationTimer
 	{
@@ -24,8 +24,8 @@ namespace CppDaydaydream
 		{
 			auto endTimepoint = std::chrono::steady_clock::now();
 
-			// 1. time_since_epoch»ñÈ¡*thisºÍÊ±ÖÓµÄÊ±¼äµÄduration
-			// 2. FloatingPointMicroseconds½«durationµÄÊ±¼äµ¥Î»×ª»»³ÉÎ¢Ãë£¬Êı¾İÀàĞÍ×ª»»³Édouble
+			// 1. time_since_epochè·å–*thiså’Œæ—¶é’Ÿçš„æ—¶é—´çš„duration
+			// 2. FloatingPointMicrosecondså°†durationçš„æ—¶é—´å•ä½è½¬æ¢æˆå¾®ç§’ï¼Œæ•°æ®ç±»å‹è½¬æ¢æˆdouble
 			auto highResStart = FloatingPointMicroseconds{ m_StartTimepoint.time_since_epoch() }; 
 			auto elapsedTime = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch() - std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch();
 
@@ -44,7 +44,7 @@ namespace CppDaydaydream
 	};
 
 
-	// []±íÊ¾²¶»ñ£¨capture£©ÉÏÏÂÎÄ±äÁ¿£¬[=]°´Öµ£¬[&]°´ÒıÓÃ£¬[]Ê²Ã´Ò²²»²¶»ñ
+	// []è¡¨ç¤ºæ•è·ï¼ˆcaptureï¼‰ä¸Šä¸‹æ–‡å˜é‡ï¼Œ[=]æŒ‰å€¼ï¼Œ[&]æŒ‰å¼•ç”¨ï¼Œ[]ä»€ä¹ˆä¹Ÿä¸æ•è·
 #define AS_PROFILE_SCOPE(name) InstrumentationTimer timer##__LINE__(name)
 	//,[&](ProfileResult profileResult) {m_ProfileResults.push_back(profileResult); }
 }
