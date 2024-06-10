@@ -2,6 +2,7 @@
 #include "ObjectPool.h"
 #include "Timer.h"
 #include "TimerHeap.h"
+#include "Memory.h"
 
 namespace CppDaydaydream
 {
@@ -54,6 +55,19 @@ int main()
     {
         //【Timer Heap】时间堆，利用最小堆实现高性能定时器
         TimerHeap th;
+    }
+
+    {
+        Timer timer("memory copy");
+        //【memcpy】函数重写
+        char s[16] = "aabbcc";
+        char d[16] = { 0 };
+
+        Memcpy(s + 2, s, 4);
+        printf("Memcpy :  %s\n", s);
+        strcpy(s, "aabbcc");
+        CPPWheels::memcpy(s + 2, s, 4);
+        printf("memcpy:   %s\n", s);
     }
 
     //std::cout << pool.GetObject()->id << std::endl;
