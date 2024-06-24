@@ -43,14 +43,11 @@ set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
 # find_package(GLEW REQUIRED)
 # message(STATUS "Found GLEW in ${GLEW_INCLUDE_DIR}")
 
+set(RootDir "${CMAKE_CURRENT_SOURCE_DIR}")
+
+set(ThirdPartyDir "${RootDir}/ThirdParty")
+
 # for different platform
-
-
-
-
-# TODO third party libs
-#add_subdirectory("ImGui")
-#set_target_properties(ImGui PROPERTIES FOLDER "ImGui")
 
 # add sub project directories
 add_subdirectory("Core")

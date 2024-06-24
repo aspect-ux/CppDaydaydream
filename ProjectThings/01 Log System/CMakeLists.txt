@@ -16,19 +16,22 @@ aux_source_directory(. DIR_SRCS)
 file(GLOB HEADER_FILES ./*.h)
 
 # 添加可执行文件并根据需求链接库
-add_executable(01_Object_Pool WIN32 ${DIR_SRCS} ${HEADER_FILES})
-target_link_libraries(01_Object_Pool Core)
+add_executable(01_Log_System WIN32 ${DIR_SRCS} ${HEADER_FILES})
+target_link_libraries(01_Log_System
+Core
+)
+target_include_directories(01_Log_System PRIVATE "${ThirdPartyDir}/spdlog/include")
 
-# 设置链接器选项为/SUBSYSTEM:CONSOLE（对于MSVC）  
+# 设置链接器选项为/SUBSYSTEM:CONSOLE(对于MSVC)
 if(MSVC)  
-    target_link_options(01_Object_Pool PRIVATE "/SUBSYSTEM:CONSOLE")  
+    target_link_options(01_Log_System PRIVATE "/SUBSYSTEM:CONSOLE")
 endif()  
 
 #set_target_properties用于设置目标属性，也就是可执行文件或库的特性，例如链接器，编译器或安装路径等
-set_target_properties(01_Object_Pool PROPERTIES OUTPUT_NAME "01 Object Pool")
+set_target_properties(01_Log_System PROPERTIES OUTPUT_NAME "01 Log System")
 
-set_target_properties(01_Object_Pool PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR})
-set_target_properties(01_Object_Pool PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR})
-set_target_properties(01_Object_Pool PROPERTIES FOLDER "Wheels")
+set_target_properties(01_Log_System PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR})
+set_target_properties(01_Log_System PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR})
+set_target_properties(01_Log_System PROPERTIES FOLDER "Project Things")
 
 

@@ -5,3 +5,4 @@ cd build
 del /S/Q *.cso
 cmake --build . --config Release -- -m
 cd ..
+pause

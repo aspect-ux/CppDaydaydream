@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 add_subdirectory("01 Graphics Algorithms")
+add_subdirectory("02 Path Finding")
 
 
 # you maybe need assets file and want to copy it to cmake binary dir

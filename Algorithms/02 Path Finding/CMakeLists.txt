@@ -16,19 +16,19 @@ aux_source_directory(. DIR_SRCS)
 file(GLOB HEADER_FILES ./*.h)
 
 # 添加可执行文件并根据需求链接库
-add_executable(01_Graphics_Algorithms WIN32 ${DIR_SRCS} ${HEADER_FILES})
-target_link_libraries(01_Graphics_Algorithms Core)
+add_executable(02_Path_Finding WIN32 ${DIR_SRCS} ${HEADER_FILES})
+target_link_libraries(02_Path_Finding Core)
 
 # 设置链接器选项为/SUBSYSTEM:CONSOLE（对于MSVC）  
 if(MSVC)  
-    target_link_options(01_Graphics_Algorithms PRIVATE "/SUBSYSTEM:CONSOLE")  
+    target_link_options(02_Path_Finding PRIVATE "/SUBSYSTEM:CONSOLE")  
 endif()  
 
 #set_target_properties用于设置目标属性，也就是可执行文件或库的特性，例如链接器，编译器或安装路径等
-set_target_properties(01_Graphics_Algorithms PROPERTIES OUTPUT_NAME "01 Graphics Algorithm")
+set_target_properties(02_Path_Finding PROPERTIES OUTPUT_NAME "02 Path Finding")
 
-set_target_properties(01_Graphics_Algorithms PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR})
-set_target_properties(01_Graphics_Algorithms PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR})
-set_target_properties(01_Graphics_Algorithms PROPERTIES FOLDER "Algorithms")
+set_target_properties(02_Path_Finding PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR})
+set_target_properties(02_Path_Finding PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR})
+set_target_properties(02_Path_Finding PROPERTIES FOLDER "Algorithms")
 
 

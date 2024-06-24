@@ -1,8 +1,10 @@
 #include <iostream>
+#include <random>
 #include "ObjectPool.h"
 #include "Timer.h"
 #include "TimerHeap.h"
 #include "Memory.h"
+#include "PokerDealer.h"
 
 namespace CppDaydaydream
 {
@@ -55,6 +57,7 @@ int main()
     {
         //【Timer Heap】时间堆，利用最小堆实现高性能定时器
         TimerHeap th;
+        //th.add(0, 2, []() {std::cout << "Timer Heap1"; });
     }
 
     {
@@ -68,6 +71,58 @@ int main()
         strcpy(s, "aabbcc");
         CPPWheels::memcpy(s + 2, s, 4);
         printf("memcpy:   %s\n", s);
+    }
+
+    {
+        // 随机发牌
+        Timer timer("Random Number Generator for Poker Card:");
+        // 创建一幅扑克牌
+        std::vector<PokerCard> deck;
+        std::vector<std::string> suits = { "Club","Diamond","Heart","Spade" };//梅花，方块，红心，黑桃
+        for (auto suit : suits)
+        {
+            for (char rank = '2'; rank <= '9'; ++rank)
+            {
+                deck.emplace_back(suit, rank);
+            }
+            // A - ACE, T- 10, J - Jack, Q - Queen, K - King
+            deck.emplace_back(suit,'A');
+            deck.emplace_back(suit,'J');
+            deck.emplace_back(suit,'Q');
+            deck.emplace_back(suit,'K');
+        }
+
+        //------使用std::shuffle实现洗牌---------
+        // 使用随机设备来生成种子  
+        std::random_device rd;
+        std::mt19937 g(rd()); // 初始化Mersenne Twister随机数生成器  
+
+        // 洗牌（随机排序）  
+        std::shuffle(deck.begin(), deck.end(), g);
+
+        //------使用rand()实现洗牌---------
+        // srand((unsigned)time(0));为rand设置随机种子，不同时间种子不同，随机序列也不同
+        // rand()%52+1 获取1-52的随机数，没有调用srand系统自动调用，并且相同srand随机序列也相同
+        
+
+        // 分发
+        const int numbers = 4;
+        std::vector<std::vector<PokerCard>> hands(numbers);
+        for (size_t i = 0; i < deck.size(); i++)
+        {
+            hands[i % numbers].push_back(deck[i]);
+        }
+
+        // 输出结果
+        for (int i = 0; i < numbers; i++)
+        {
+            std::cout << "player" << i + 1 << ":";
+            for (const auto& card : hands[i])
+            {
+                std::cout << card << " ";
+            }
+            std::cout << std::endl;
+        }
     }
 
     //std::cout << pool.GetObject()->id << std::endl;
