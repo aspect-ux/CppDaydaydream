@@ -58,6 +58,9 @@ add_subdirectory("Wheels") # 2.stl_data_structures_wheels
 add_subdirectory("ProjectThings") # 3.project_things, project building problem or something like this
 add_subdirectory("Algorithms") # 4.algorithms, mainly solve general algorithm about gaming or novel technics that could be used in gaming here
 
+#add_subdirectory(ThirdPartyDir/)
+# thirdparty things
+add_subdirectory("${ThirdPartyDir}/yaml-cpp")
 # maybe you need set sub-projs to a specific variable
 #set(POINTS
     #1.cpp_basic_things

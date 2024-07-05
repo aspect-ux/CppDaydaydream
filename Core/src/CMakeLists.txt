@@ -18,5 +18,7 @@ add_subdirectory("Math")
 #file(GLOB CORE_SOURCES "src/*.cpp")
 add_library(Core STATIC ${CoreSourceFiles})
 
+target_link_libraries(Core PUBLIC yaml-cpp::yaml-cpp)
+
 #向目标指定头文件
 target_include_directories(Core PUBLIC .)
